@@ -8,28 +8,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/equipment")
+@RequestMapping("/api/equipment")
 public class EquipmentController {
 
-    private final EquipmentService equipServ;
+    private final EquipmentService equipmentService;
 
     @Autowired
-    public EquipmentController(EquipmentService equipServ) {
-        this.equipServ = equipServ;
+    public EquipmentController(EquipmentService equipmentService) {
+        this.equipmentService = equipmentService;
     }
 
+    // Create new equipment
     @PostMapping
-    public EquipmentEntity saveEquipment(@RequestBody EquipmentEntity equipment) {
-        return equipServ.saveEquipment(equipment);
+    public EquipmentEntity addEquipment(@RequestBody EquipmentEntity equipment) {
+        return equipmentService.saveEquipment(equipment);
     }
 
+    // Get all equipment
     @GetMapping
     public List<EquipmentEntity> getAllEquipment() {
-        return equipServ.getAllEquipment();
+        return equipmentService.getAllEquipment();
     }
 
+    // Get available equipment
     @GetMapping("/available")
     public List<EquipmentEntity> getAvailableEquipment() {
-        return equipServ.getAvailableEquipment();
+        return equipmentService.getAvailableEquipment();
     }
 }

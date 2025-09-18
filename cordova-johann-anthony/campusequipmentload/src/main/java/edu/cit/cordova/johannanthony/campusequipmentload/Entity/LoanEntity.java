@@ -1,43 +1,37 @@
 package edu.cit.cordova.johannanthony.campusequipmentload.Entity;
 
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "loan")
+@Table(name = "Loans")
 public class LoanEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long loanId;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
+    @ManyToOne(optional = false)
     private StudentEntity student;
 
-    private Date startDate;
-    private Date dueDate;
-    private Date returnDate;
-    private String status;
+    @ManyToOne(optional = false)
+    private EquipmentEntity equipment;
 
-    public LoanEntity() {
-        super();
+    private LocalDate startDate;
+    private LocalDate dueDate;
+    private LocalDate returnDate;
+
+    private String status; // "ONGOING", "RETURNED"
+    private boolean overdue;
+    private Double penalty;
+
+
+    public Long getId() {
+        return id;
     }
 
-    public LoanEntity(Long loanId, StudentEntity student, Date startDate, Date dueDate, Date returnDate, String status) {
-        this.loanId = loanId;
-        this.student = student;
-        this.startDate = startDate;
-        this.dueDate = dueDate;
-        this.returnDate = returnDate;
-        this.status = status;
-    }
-
-    public Long getLoanId() {
-        return loanId;
-    }
-
-    public void setLoanId(Long loanId) {
-        this.loanId = loanId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public StudentEntity getStudent() {
@@ -48,27 +42,35 @@ public class LoanEntity {
         this.student = student;
     }
 
-    public Date getStartDate() {
+    public EquipmentEntity getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(EquipmentEntity equipment) {
+        this.equipment = equipment;
+    }
+
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -78,5 +80,21 @@ public class LoanEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isOverdue() {
+        return overdue;
+    }
+
+    public void setOverdue(boolean overdue) {
+        this.overdue = overdue;
+    }
+
+    public Double getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(Double penalty) {
+        this.penalty = penalty;
     }
 }

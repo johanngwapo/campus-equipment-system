@@ -16,7 +16,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public StudentEntity postStudent(@RequestBody StudentEntity stud) {
+    public StudentEntity postStudent(@RequestBody StudentEntity stud)
+    {
         return studServ.postStudent(stud);
+    }
+
+    @GetMapping("/{id}")
+    public StudentEntity getStudent(@PathVariable Long id) {
+        return studServ.getStudentById(id);
     }
 }

@@ -14,6 +14,7 @@ public class EquipmentEntity {
     private String serialNumber;
     private Boolean availability;
 
+    private Integer quantity;
     public Long getEquipmentId() {
         return equipmentId;
     }
@@ -52,5 +53,13 @@ public class EquipmentEntity {
 
     public void setAvailability(Boolean availability) {
         this.availability = availability;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

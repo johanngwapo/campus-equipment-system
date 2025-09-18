@@ -5,32 +5,21 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "students")
 public class StudentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studentId;
+    private Long id;
 
     private String studentNo;
     private String name;
     private String email;
 
-    public StudentEntity() {
-        super();
+    public Long getId() {
+        return id;
     }
 
-    public StudentEntity(Long studentId, String studentNo, String name, String email) {
-        super();
-        this.studentId = studentId;
-        this.studentNo = studentNo;
-        this.name = name;
-        this.email = email;
-    }
-
-    public Long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStudentNo() {

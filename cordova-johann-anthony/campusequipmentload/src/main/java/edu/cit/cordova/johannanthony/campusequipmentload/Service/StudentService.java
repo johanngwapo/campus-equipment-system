@@ -17,4 +17,9 @@ public class StudentService {
     public StudentEntity postStudent(StudentEntity stud) {
         return studRepo.save(stud);
     }
+
+    public StudentEntity getStudentById(Long id) {
+        return studRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
+    }
 }
