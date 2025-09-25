@@ -30,25 +30,23 @@ public class LoanService {
         this.equipmentRepo = equipmentRepo;
     }
 
-    // Save or update a loan
+
     public LoanEntity saveLoan(LoanEntity loan) {
         return loanRepo.save(loan);
     }
 
-    // Get all loans
+
     public List<LoanEntity> getAllLoans() {
         return loanRepo.findAll();
     }
 
-    // Return a loan and update status and return date
     public LoanEntity returnLoan(Long id, Map<String, String> body) {
         LoanEntity loan = loanRepo.findById(id).orElse(null);
 
         if (loan != null && !"RETURNED".equalsIgnoreCase(loan.getStatus())) {
-            loan.setReturnDate(LocalDate.now()); // set current date as returnDate
+            loan.setReturnDate(LocalDate.now());
             loan.setStatus("RETURNED");
 
-            // No conversion needed; fields already LocalDate
             LocalDate dueDate = loan.getDueDate();
             LocalDate returnDate = loan.getReturnDate();
 
@@ -58,9 +56,8 @@ public class LoanService {
 
             return loanRepo.save(loan);
         }
-        return loan; // null if not found or already returned
+        return loan;
     }
-    // Get active loans for a student (status = ONGOING)
     public List<LoanEntity> getActiveLoans(Long studentId) {
         return loanRepo.findByStudentIdAndStatus(studentId, "ONGOING");
     }

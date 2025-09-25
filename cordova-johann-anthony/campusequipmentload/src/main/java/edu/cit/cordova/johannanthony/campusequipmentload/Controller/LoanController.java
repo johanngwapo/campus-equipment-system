@@ -27,19 +27,16 @@ public class LoanController {
         this.loanServ = loanServ;
     }
 
-    // Create a loan - pass in a custom DTO or LoanEntity
     @PostMapping
     public ResponseEntity<?> createLoan(@RequestBody Map<String, Object> loanRequest) {
         return loanServ.createLoan(loanRequest);
     }
 
-    // Get all loans
     @GetMapping
     public List<LoanEntity> getAllLoans() {
         return loanServ.getAllLoans();
     }
 
-    // Return a loan by id, optionally passing return date in body
     @PostMapping("/{id}/return")
     public ResponseEntity<?> returnLoan(@PathVariable Long id, @RequestBody(required = false) Map<String, String> body) {
         LocalDate returnDate = LocalDate.now();
